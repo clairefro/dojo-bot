@@ -8,12 +8,11 @@ module.exports = {
 	name: "random",
 	description: "Delivers a random kata",
 	execute: async (msg, args) => {
-		console.log({ args });
 		console.log("Fetching kata...");
 		const params = {};
+		// TODO: refactor param mapping elsewhere
 		args.forEach((arg) => {
 			if (arg.match("=")) {
-				console.log("Param detected: ", arg);
 				const parts = arg.split("=");
 				if (parts[0] === "difficulty") {
 					parts[0] = "kyus";
