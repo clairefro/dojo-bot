@@ -1,5 +1,7 @@
 const CWService = require("../lib/CWService");
 const Scraper = require("../lib/Scraper");
+const { MessageEmbed } = require("discord.js");
+const sanify = require("../util/sanify");
 
 const scraper = new Scraper();
 const codewarsService = new CWService(scraper);
@@ -34,7 +36,23 @@ module.exports = {
 				params[parts[0]] = parts[1];
 			}
 		});
-		const response = await codewarsService.getRandomKata(params);
-		console.log("response sample: ", response.slice(0, 3));
+		try {
+			const response = await codewarsService.getRandomKata(params);
+			const embed = new MessageEmbed()
+				.setTitle(`${sanify(msg.author.username)} challenges the channel to a random kata!`)
+				.setURL(response.href)
+				.setColor(0x0000ff)
+				.setDescription(
+					"Are you up to the task? Head over the the link. Then click 'Train' in the upper right to start crafting your solution.\n\nPost your solution in this channel."
+				)
+				.addFields(
+					{ name: "Kata", value: `${response.title} (${response.kyu} kyu)` },
+					{ name: "Link", value: response.href }
+				);
+
+			msg.channel.send(embed);
+		} catch (e) {
+			msg.reply("I didn't quite understand...");
+		}
 	},
 };

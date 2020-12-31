@@ -2,6 +2,8 @@ require("dotenv").config();
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 
+// TOOD: set up global context for CWService/Scraper
+
 // Set up commands
 bot.commands = new Discord.Collection();
 const botCommands = require("./commands");
@@ -19,7 +21,6 @@ bot.on("ready", () => {
 
 bot.on("message", (msg) => {
 	const args = msg.content.split(/\s+/);
-	console.log(args);
 	// this assumes command is the first word in message
 	const command = args.shift().toLowerCase();
 
