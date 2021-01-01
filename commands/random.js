@@ -43,7 +43,7 @@ module.exports = {
 				.setURL(response.href)
 				.setColor(0x0000ff)
 				.setDescription(
-					"Are you up to the task? Head over the the link. Then click 'Train' in the upper right to start crafting your solution.\n\nPost your solution in this channel."
+					"Are you up to the task? Head over the the link. Then click 'Train' in the upper right to start crafting your solution.\n\nIf you submit your solution, enter 'done <your_username>' in the chat and I will check...."
 				)
 				.addFields(
 					{ name: "Kata", value: `${response.title} (${response.kyu} kyu)` },
